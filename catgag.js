@@ -1,14 +1,11 @@
-/*var game = (function(window) {
-    var self = {};
-    return self;    
-}(window));*/
-
-function game() {
+function CatGAGGame() {
+    //! Returns true if the item is outside the canvas.
     function outsideCanvas(item) {
         return (item.x < 0 || item.y < 0 || item.x > jaws.width || item.y > jaws.height);
     }
     
-    var Kissa = function() {
+    //! Our hero, the Cat!
+    var Cat = function() {
         this.barrelRolling = false;
         this.anchor("center");
         this.setImage("cat.jpg");
@@ -58,14 +55,14 @@ function game() {
             this.gags.draw();
         }
     };
-    Kissa.prototype = new jaws.Sprite({});
+    Cat.prototype = new jaws.Sprite({});
         
     var CatGag = function(cat, x, y, dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.cat = cat;
-        this.escaped = false;
+        this.escaped = false; //! False if the gag hasn't escaped the cat yet
         
         this.update = function() {
             if (!this.escaped && !this.rect().collideRect(this.cat.rect())) {
@@ -78,46 +75,46 @@ function game() {
     };
     CatGag.prototype = new jaws.Sprite({image: "catgag.png"});
     
-    var kisu;
+    var cat;
     
     this.setup = function() {
         jaws.preventDefaultKeys(["up", "down", "left", "right", "space"])
 
-        kisu = new Kissa();
-        kisu.x = 100; kisu.y = 100;
+        cat = new Cat();
+        cat.x = 100; cat.y = 100;
     };
     
     this.update = function() {
         if (jaws.pressed("left")) {
-            kisu.x -= 5;
+            cat.x -= 5;
         }
         
         if (jaws.pressed("right")) {
-            kisu.x += 5;
+            cat.x += 5;
         }
         
         if (jaws.pressed("up")) {
-            kisu.y -= 5;
+            cat.y -= 5;
         }
         
         if (jaws.pressed("down")) {
-            kisu.y += 5;
+            cat.y += 5;
         }
         
-        if (jaws.pressed("space") && !kisu.barrelRolling) {
-            kisu.barrelRoll();
+        if (jaws.pressed("space") && !cat.barrelRolling) {
+            cat.barrelRoll();
         }
         
         if (jaws.pressed("z")) {
-            kisu.shoot();
+            cat.shoot();
         }
         
-        kisu.update();
+        cat.update();
     };
     
     this.draw = function() {
         jaws.clear();
-        kisu.draw();
+        cat.draw();
     };
 }
 
@@ -125,5 +122,5 @@ window.onload = function() {
     jaws.assets.add("cat.jpg");
     jaws.assets.add("catgag.png");
     
-    jaws.start(game, {fps: 30});
+    jaws.start(CatGAGGame, {fps: 30});
 };
