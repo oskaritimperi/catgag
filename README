@@ -1,0 +1,4 @@
+A version modified to use EaselJS library instead of Jaws.
+
+CatGag uses a modified version of EaselJS too, which can
+be found in https://github.com/oswjk/EaselJS
