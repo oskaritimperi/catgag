@@ -38,5 +38,16 @@ Game.handleKeys = function() {
 window.Game = Game;
 }(window));
 
-window.onload = function() { Ticker.setFPS(30); Game.init(); }
+window.Log = function(str) {
+    var ts = Date.now().toString();
+    ts = ts.substr(ts.length - 6);
+    window.LogElem.value = ts + " " + str + "\n" + window.LogElem.value;
+}
+
+window.onload = function() {
+    window.LogElem = document.getElementById("log");
+    window.Log("window.onload()");
+    Ticker.setFPS(30);
+    Game.init();
+}
 
