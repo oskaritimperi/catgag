@@ -9,6 +9,7 @@
 <script src="../EaselJS/src/easeljs/display/SpriteSheet.js"></script>
 <script src="../EaselJS/src/easeljs/display/Shadow.js"></script>
 <script src="../EaselJS/src/easeljs/geom/Matrix2D.js"></script>
+<script src="../EaselJS/src/easeljs/geom/Rectangle.js"></script>
 <script src="../EaselJS/src/easeljs/events/MouseEvent.js"></script>
 <script src="../EaselJS/src/easeljs/events/KeyboardEvent.js"></script>
 <script src="../EaselJS/src/easeljs/display/DisplayObject.js"></script>
@@ -22,12 +23,26 @@
 
     <!-- <script src="easel.js"></script> -->
 
+    <script src="Gag.js"></script>
     <script src="Cat.js"></script>
     <script src="catgag.js"></script>
+    
+<style>
+#log {
+border: 1px solid black;
+float: left;
+width: 400px;
+height: 400px;
+}
+
+</style>
+    
 </head> 
 	<body>
 	<div class="canvasHolder">
-		<canvas id="canvas" width="800" height="600" style="border: 1px solid black" ></canvas>
+		<canvas id="canvas" width="800" height="600" style="border: 1px solid black; float: left; margin-right: 10px;" ></canvas>
+	    <textarea id="log"></textarea>
+	    <div style="clear: both;" />
 	</div>
 	<div id="help">
 	    <p>

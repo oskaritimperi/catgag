@@ -42,7 +42,11 @@ var p = Cat.prototype = new Container();
         }
         
         for (i = 0; this._gags[i]; i++) {
-            //if (this._gags[i].escaped && 
+            if (this._gags[i].escaped && this.rect().collidesWith(this._gags[i].rect())) {
+                window.Log("CATCHED");
+                this.getStage().removeChild(this._gags[i]);
+                this._gags.splice(i, 1);
+            }
         }
     }
     
@@ -59,9 +63,13 @@ var p = Cat.prototype = new Container();
     p.gag = function() {
         if (!this._gagging) {
             this._gagging = true;
-            // @todo create/shoot the gag
+            this._gags.push(new Gag(this, this.x, this.y, this.rotation));
             window.setTimeout(function(cat) { cat._gagging = false; }, 250, this);
         }
+    }
+    
+    p.rect = function() {
+        return new Rectangle(this.x-this.regX, this.y-this.regY, this.img.width, this.img.height);
     }
 
 window.Cat = Cat;
