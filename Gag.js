@@ -10,7 +10,7 @@ var p = Gag.prototype = new Container();
         Gag.img.onload = function() {
             Gag.gfx = new Bitmap(Gag.img);
         }
-        Gag.img.src = "catgag.png";
+        Gag.img.src = "gfx/catgag.png";
     }
     Gag.initialize();
     Gag.count = 0;

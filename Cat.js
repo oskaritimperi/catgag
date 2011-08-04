@@ -19,7 +19,7 @@ var p = Cat.prototype = new Container();
         
         this.img = new Image();
         this.img.onload = function() { _this.setup(); };
-        this.img.src = "cat.jpg";
+        this.img.src = "gfx/cat.jpg";
     };
 
     p.setup = function() {
