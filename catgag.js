@@ -47,7 +47,7 @@ Game.resMan.add("vacuum12", "vacuum_12.png");
 Game.resMan.add("vacuum21", "vacuum_21.png");
 Game.resMan.add("vacuum22", "vacuum_22.png");
 Game.resMan.done = function() {
-    window.Log("done");
+    Gag.initialize();
     Game.init();
 }
 

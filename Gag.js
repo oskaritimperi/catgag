@@ -5,15 +5,13 @@ var Gag = function(cat, x, y, dir) {
 }
 var p = Gag.prototype = new Container();
 
-    Gag.initialize = function() {
-        Gag.img = new Image();
-        Gag.img.onload = function() {
-            Gag.gfx = new Bitmap(Gag.img);
-        }
-        Gag.img.src = "gfx/catgag.png";
-    }
-    Gag.initialize();
-    Gag.count = 0;
+Gag.count = 0;
+Gag.img = null;
+
+Gag.initialize = function() {
+    Gag.img = Game.resMan.get("catgag");
+    Gag.gfx = new Bitmap(Gag.img);
+}
     
     p.escaped = false;
     p.dir = 0;
@@ -31,7 +29,7 @@ var p = Gag.prototype = new Container();
         this.dir = dir;
         this.cat = cat;
         
-        this.gfx = new Bitmap(Gag.img);
+        this.gfx = Gag.gfx.clone();
         this.addChild(this.gfx);
         
         cat.getStage().addChild(this);
