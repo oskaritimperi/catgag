@@ -67,8 +67,6 @@ ResourceMan.getFileType = function(url) {
     p.loadAll = function(onload) {
         var _this = this;
         
-        //this._sources.forEach(function(idx, val, arr) {
-        //for each (var src in this._sources) {
         for (var i = 0; i < this._sources.length; i++) {
             var src = this._sources[i];
             var ft = ResourceMan.getFileType(src.url);
@@ -77,14 +75,13 @@ ResourceMan.getFileType = function(url) {
             res.n = src.n;
             res.onload = onload;
             res.type = ft;
+            res.resman = this;
             
             switch (ft) {
                 case "image":
                     res.img = new Image();
-                    //res.img.res = res;
-                    res.img.onload = function(e) {
-                        _this._resourceLoaded(res);
-                    }
+                    res.img.res = res;
+                    res.img.onload = _this._resourceLoaded;
                     res.img.src = src.url;
                     break;
             }
@@ -94,16 +91,19 @@ ResourceMan.getFileType = function(url) {
     }
     
     p._resourceLoaded = function(res) {
+        var res = this.res;
+        var resman = res.resman;
+        
         switch (res.type) {
             case "image":
-                this._resources[res.n] = res.img;
+                resman._resources[res.n] = res.img;
                 break;
         }
         
-        this._progress++;
+        resman._progress++;
         
         if (res.onload) res.onload();
-        if (this._progress == this._sources.length && this.done) this.done();
+        if (resman._progress == resman._sources.length && resman.done) resman.done();
     }
 
 window.ResourceMan = ResourceMan;
