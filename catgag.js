@@ -35,6 +35,22 @@ Game.handleKeys = function() {
     if (stage.isKeyPressed("a")) { this.cat.barrelRoll(); }
 }
 
+Game.resMan = new ResourceMan();
+Game.resMan.root = "gfx/";
+Game.resMan.add("cat", "cat.jpg");
+Game.resMan.add("catgag", "catgag.png");
+Game.resMan.add("vacuum", "vacuum.png");
+Game.resMan.add("vacuum1", "vacuum_1.png");
+Game.resMan.add("vacuum2", "vacuum_2.png");
+Game.resMan.add("vacuum11", "vacuum_11.png");
+Game.resMan.add("vacuum12", "vacuum_12.png");
+Game.resMan.add("vacuum21", "vacuum_21.png");
+Game.resMan.add("vacuum22", "vacuum_22.png");
+Game.resMan.done = function() {
+    window.Log("done");
+    Game.init();
+}
+
 window.Game = Game;
 }(window));
 
@@ -48,6 +64,11 @@ window.onload = function() {
     window.LogElem = document.getElementById("log");
     window.Log("window.onload()");
     Ticker.setFPS(30);
-    Game.init();
+    
+    Game.resMan.loadAll(function() {
+        window.Log(Game.resMan.progress() + "% loaded");
+    });
+    
+    //Game.init();
 }
 
