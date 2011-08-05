@@ -15,20 +15,14 @@ var p = Cat.prototype = new Container();
     p.initialize = function() {
         p.base_initialize();
         
-        var _this = this;
-        
-        this.img = new Image();
-        this.img.onload = function() { _this.setup(); };
-        this.img.src = "gfx/cat.jpg";
-    };
-
-    p.setup = function() {
+        this.img = Game.resMan.get("cat");
         this.gfx = new Bitmap(this.img);
-        this.addChild(this.gfx);
-           
+        
         this.regX = this.img.width / 2;
         this.regY = this.img.height / 2;
-    }
+        
+        this.addChild(this.gfx);
+    };
     
     p.tick = function() {
         if (this._barrelRolling) {
